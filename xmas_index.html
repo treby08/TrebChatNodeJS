@@ -1,0 +1,603 @@
+<html>
+<head>
+	<title>Google</title>
+	<link href="/css" rel="stylesheet">
+	<link href="/maincss" rel="stylesheet">
+	<link href="/jpcss" rel="stylesheet">
+	<script src="/jquery"></script>
+	<script src="/js"></script>
+	<script src="/jssnow"></script>
+	<script src="/trebjs"></script>
+	<script src="/socket.io/socket.io.js"></script>
+    <script src="/jplayer"></script>
+    <script src="/jplayerlist"></script>
+    
+	
+	<script>
+	snowStorm.snowColor = '#99ccff'; // blue-ish snow!?
+	snowStorm.flakesMaxActive = 50;  // show more snow on screen at once
+	snowStorm.useTwinkleEffect = false; // let the snow flicker in and out of view
+	snowStorm.snowStick = true;
+	snowStorm.animationInterval = 33;
+	
+	</script>
+	
+	<script>
+		snowStorm.excludeMobile = false;
+		if (window.location.toString().match(/alpha/i) && !navigator.userAgent.match(/msie/i)) {
+		  /* if showing the fancy CSS3-based homepage FX stuff, slide snow behind things. */
+		  snowStorm.targetElement = 'bg';
+		}
+		if (window.location.toString().match(/nowebfont/i)) {
+		  snowStorm.useWebFont = false;
+		}
+		
+		function test(score){
+			alert(score)
+		}
+		</script>
+	<script type="text/javascript">
+
+	var myPlaylist;
+	var socket = io.connect();	
+//<![CDATA[
+		$(document).ready(function(){
+
+			myPlaylist = new jPlayerPlaylist({
+				jPlayer: "#jquery_jplayer_1",
+				cssSelectorAncestor: "#jp_container_1"
+			}, [],{
+				 playlistOptions: {
+					autoPlay: true,
+				  },
+				swfPath: "../js",
+				supplied: "mp3",
+				wmode: "window",
+				free: true,
+				smoothPlayBar: true,
+				keyEnabled: false
+				});
+				
+			/*if (document.getElementById("jp_audio_0")){
+				document.getElementById("jp_audio_0").addEventListener("ended",initNextSong);
+				
+			}*/
+			
+			$("#jquery_jplayer_1").bind($.jPlayer.event.ended, function(event) {
+				//alert('nextSong ni');
+				$('.jp-playlist-current')[0].scrollIntoView(true);
+				initNextSong();
+			});
+		});
+		
+		function playThis(path,user){
+			var arrfName = path.split("\/");
+			var fName = arrfName[arrfName.length-1];
+
+			socket.emit('queue song', {
+			  title:fName,
+			  mp3:path,
+			  artist:user,
+			});			
+		}
+		
+		
+			
+			function initNextSong(){
+				//alert("initNextSong");
+				socket.emit('next song');
+			}
+
+
+
+			function getSong(index){
+				socket.emit('get song', index, function(data){
+					return data;
+				});
+			}
+
+			function queue(path, flag){
+				if(flag == 1){
+					socket.emit('queue song', path);
+				} else {
+					socket.emit('remove song', path);
+				}
+			}
+			
+			function clear(){
+				socket.emit('clear music');
+				
+			}
+			
+		jQuery(function($){
+			var buzz = new Audio("audio/files/buzz.wav"); 
+			var mechat = new Audio("audio/files/alert.wav"); 
+			var newuser = new Audio("audio/files/online.wav"); 
+			var newnick = new Audio("audio/files/alert.wav"); 
+			var leaveschat = new Audio("audio/files/offline.wav"); 
+			var newchat = new Audio("audio/files/message.wav"); 
+			var whisper = new Audio("audio/files/alert.wav");
+			var newtopic = new Audio("audio/files/alert.wav");  
+			
+			var $nickForm = $('#setNick');
+			var $nickError = $('#nickError');
+			var $nickBox = $('#nickname');
+			var $users = $('#users');
+			var $messageForm = $('#send-message');
+			var $messageBox = $('#message');
+			var $chat = $('#chat');
+			var $emoticon = $('#emoticons img');
+			var $topic = $('#topic');
+			var $soundfx = $('#soundfx button');
+			
+			
+			
+			$(window).focus(function() {
+			    socket.emit('available');
+			})
+			    .blur(function() {
+			        socket.emit('idle');
+			    });
+
+			socket.on('update idle', function(data){
+				$('#'+data.nick).attr('class', 'away');
+			});
+			
+			socket.on('update available', function(data){
+				$('#'+data.nick).attr('class', 'available');
+				
+				
+			});
+
+			$('#clear').click(function(){
+				$('#chat').html('');
+			});
+
+			$('#soundcheck').click(function(){
+				$(this).toggleClass("soundoff");
+				
+			});
+			$('#showSnow').click(function(){
+				snowStorm.toggleSnow();
+				if(snowStorm.active)
+					$('#showSnow').html('Off');
+				else
+					$('#showSnow').html('On');
+			});
+			
+			$('#flapBtn').click(function(){				
+				if($('#flapB').is(":visible"))
+					$('#flapB').hide('fast');
+				else
+					$('#flapB').show('slow');
+			});
+			
+			$('#buzzAll').click(function(){
+				socket.emit('buzz all');
+			});
+
+			$soundfx.click(function(e){
+				
+				socket.emit('send sound', '<audio autoplay=""><source src="audio/files/'+$(this).attr('alt')+'" type="audio/mpeg"></audio><img src="images/files/'+$(this).attr('alt').substring(0, $(this).attr('alt').lastIndexOf("."))+'.gif" class="img-rounded" style="width:150px;">');
+				$('#soundfx>button').attr("disabled", true);
+				var time = 10;
+				setInterval(function() {
+				        if (time === 0) {
+				            time = "finished";
+				          		  $('#soundfx>button').attr("disabled", false);
+				        }
+				        if (time != "finished") {
+				            time = time - 1;
+				        }
+				}, 1000);
+
+			});
+			
+			socket.on('notify all', function(){
+				$('#googleCover').show();
+				$('#buzzAll').attr("disabled", true);
+				$('#buzzAll').css("background-color", "#888");
+				var gtime = 10;
+				setInterval(function() {
+				        if (gtime === 0) {
+				            gtime = "finished";
+				          		  $('#buzzAll').attr("disabled", false);
+				          		  $('#buzzAll').css("background-color", "red");
+				        }
+				        if (gtime != "finished") {
+				            gtime = gtime - 1;
+				        }
+				}, 1000);
+			});
+
+			$('#googleCover').click(function(){
+				$(this).hide();
+				
+			});
+
+			socket.on('update music', function(data){
+				$chat.append('<span class="msg"><b>[ SERVER ] : Next Song -- Current Number:'+data.idx+'</b></span><br/>');
+				myPlaylist.next();
+			});
+			socket.on('clear playlist', function(data){
+				$chat.append('<span class="msg"><b>[ '+data.nick+' emptied the playlist]</b></span><br/>');
+				myPlaylist.setPlaylist(data.music);
+				cnt=1;
+			});
+			
+			socket.on('player control', function(data){	
+				if (data.type=="next"){
+					$chat.append('<span class="msg"><b>[ '+data.nick+' ] : Next Song</b></span><br/>');
+					myPlaylist.next()
+				}else if (data.type=="play"){
+					$chat.append('<span class="msg"><b>[ '+data.nick+' ] : Play Song</b></span><br/>');
+					myPlaylist.play();
+				}else if (data.type=="pause"){
+					$chat.append('<span class="msg"><b>[ '+data.nick+' ] : Pause Song</b></span><br/>');
+					myPlaylist.pause();
+				}else if (data.type=="remove"){
+					socket.emit('remove song', data.idx-1);
+					myPlaylist.remove(data.idx-1);
+				}else if (data.type=="prev"){
+					$chat.append('<span class="msg"><b>[ '+data.nick+' ] : Previous Song</b></span><br/>');
+					myPlaylist.previous()
+				}else if (data.type=="playAt"){
+					if (data.idx > 0){
+						$chat.append('<span class="msg"><b>[ '+data.nick+' ] : Play Song At ('+data.idx+')</b></span><br/>');
+						myPlaylist.select(data.idx-1);
+						myPlaylist.play(data.idx-1);
+					}else if (data.idx > data.listCnt-1)
+						$chat.append('<span class="msg"><b> Playlist Index:'+data.idx+' is greater than the playlist count</b></span><br/>');
+					else if (data.idx <1)
+						$chat.append('<span class="msg"><b> Playlist Index:'+data.idx+' is invalid</b></span><br/>');
+						
+				}else if (data.type=="clear"){
+					
+					socket.emit('clear music');
+					myPlaylist.pause();
+					$("#jquery_jplayer_1").jPlayer("stop");
+					if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+				}
+			});
+			
+			socket.on('update queue', function(data){
+				
+				if (data.music.length==1 || data.music.length==data.idx){
+					myPlaylist.add(data.music[data.music.length-1],true);
+				}else
+					myPlaylist.add(data.music[data.music.length-1]);
+			});
+			
+			socket.on('update list', function(data){
+				//alert(data.idx);
+				myPlaylist.setPlaylist(data.music);
+				myPlaylist.select(data.idx);
+				myPlaylist.play(data.idx);
+				$("#jquery_jplayer_1").jPlayer("play",data.ph);
+				$('.jp-playlist-current')[0].scrollIntoView(true);
+			});
+			
+			socket.on('refresh', function(data){
+				var timesRun = 5;
+				var interval = setInterval(function(){
+					if(timesRun == 0){
+						clearInterval(interval);
+						$chat.append(data.msg);
+					}else
+						$chat.append('<span class="error">[SERVER] : Server will restart. Refresh in '+timesRun+' seconds</span><br/>');
+					
+					timesRun = timesRun-1;
+				}, 1000); 
+				
+				
+			});
+			
+			socket.on('yourtheboss', function(){
+				$chat.append('<span class="error">[SERVER] : <b>Your the assigned DJ</b></span><br/>');
+				//$("#jquery_jplayer_1").bind($.jPlayer.event.play, function(event) { // Add a listener to report the time play began
+			  var jp = $('#jquery_jplayer_1'), jpData = jp.data('jPlayer');
+				setInterval(function() {
+				   socket.emit('set currentTime',jpData.status.currentTime);
+				},1000);
+			//});
+			});
+			
+			
+			
+			$emoticon.click(function(e){
+				socket.emit('send emoticon', '<span class="'+$(this).attr('alt')+'"><p style="margin-left:70px;width:150px;vertical-align:middle;height:70px;margin-top:20px"><b> '+$(this).attr('name')+' </b></p></span>');
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+
+			$nickForm.submit(function(e){
+
+				e.preventDefault();
+				socket.emit('new user', $nickBox.val(), function(data,txt){
+					if(data){
+						$('#nickWrap').hide();
+						$('#contentWrap').show();
+						//$('#flapB').show();
+						//$('#xmasBann').show();
+					} else {
+						if (txt=="")
+							$nickError.html('Username is Empty.');
+						else
+							$nickError.html('That username is already take! Try again.');
+					}
+				});
+				$nickBox.val('');
+			});
+
+			socket.on('usernames', function(data,stats){
+				var html = '';
+				for(i=0; i < data.length; i++){
+					html += '<span id="'+data[i]+'" class="'+stats[i]+'"></span> ' + data[i] + ' </br>'
+				}
+				$users.html(html);
+			});
+
+			$messageForm.submit(function(e){
+				e.preventDefault();
+				socket.emit('send message', $messageBox.val(), function(data){
+					$chat.append('<span class="error"><b>' + data + "</span><br/>");
+				});
+				$messageBox.val('');
+			});
+
+			socket.on('buzz', function(data){
+					buzz.play();
+				$chat.append('<span class="buzz"><b>' + data.nick + ': </b> BUZZ!</span><br/>');
+			});
+
+			socket.on('server message', function(data){
+				if(!$("#soundcheck").hasClass("soundoff")){
+					newchat.play();
+				}
+				$chat.append('<span class="error">' + data.msg + "</span><br/>");
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+			socket.on('new message', function(data){
+
+				if(!$("#soundcheck").hasClass("soundoff")){
+					newchat.play();
+				}
+				$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+			
+			socket.on('new topic', function(data){
+				if(!$("#soundcheck").hasClass("soundoff")){
+					newtopic.play();
+				}
+				$chat.append('<span class="newtopic">-= ' + data.nick + ' sets a topic: <b>' + data.msg + "</b> =-</span><br/>");
+				$topic.html('<marquee>'+data.msg+' <i style="font-size:10px">by '+data.nick+'</i>'+'</marquee>');
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+
+			
+			socket.on('queue now', function(data){
+				//queue(data.path,1);
+				playThis(data.path,data.nick);
+			});
+
+			socket.on('display message', function(data){
+				$chat.append('<span class="msg"><b>' + data.message + '</b></span><br/>');
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}	
+			});
+
+			socket.on('new audio', function(data){
+				var message = setAudio(data);
+				socket.emit('broadcast message', message);
+				
+			});
+			socket.on('new image', function(data){
+				var message = setImage(data.src);
+				$chat.append('<span class="msg"><b>' + data.nick + '</b> shows you an image<br/>' +message+"</span><br/>");
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+			
+			socket.on('audio exist', function(data){
+				$chat.append('<font color="red">'+data.nick+'</font> : '+data.msg);
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}	
+			});
+
+			socket.on('me message', function(data){
+				if(!$("#soundcheck").hasClass("soundoff")){	
+					mechat.play();
+				}
+				$chat.append('<span class="memsg">*' + data.nick + ' ' + data.msg + "</span><br/>");
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+
+			socket.on('change nick', function(data){
+				if(!$("#soundcheck").hasClass("soundoff")){
+					newnick.play();
+				}
+				$chat.append('<span class="newnick">***' + data.nick + ' is now known as ' + data.msg + "</span><br/>");
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+
+			socket.on('enters chatroom', function(data){
+				if(!$("#soundcheck").hasClass("soundoff")){	
+					newuser.play();
+				}
+				$chat.append('<span class="enters"><b>' + data.nick + '</b> has entered the chatroom.</span><br/>');
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+
+			socket.on('exits chatroom', function(data){
+				if(!$("#soundcheck").hasClass("soundoff")){
+					leaveschat.play();
+				}
+				$chat.append('<span class="exits"><b>' + data.nick + '</b> leaves the chatroom.</span><br/>');
+				var objDiv = document.getElementById("chat");
+				if($("#scrollCheckbox").hasClass("active")){			
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+			});
+
+			socket.on('whisper', function(data){
+				if(!$("#soundcheck").hasClass("soundoff")){
+					whisper.play();
+				}
+				$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + '</span><br/>');
+			});
+
+		})
+	</script>
+</head>	
+<body>
+	<div id="googleCover"></div>
+	<div id="nickWrap">
+		<p id="nickError"></p>
+		<form id="setNick">
+			<div class="input-append">
+			  <input autofocus="autofocus" id="nickname" type="text" placeholder="Enter a nickname" maxlength="15">
+			  <button class="btn btn-success" type="submit" style="font-size:25px;height:60px;width:100px;">Enter</button>
+			</div>
+		</form>
+	</div>
+	
+	<div id="contentWrap" >
+	<div class="row-fluid" style="float:left" >
+		<div id="chatWrap" class="span9">
+			<div id="chattop" class="row-fluid" >
+				<div id="topic" ><marquee>TOPIC</marquee></div>
+			</div>
+			<div id="chat" ></div>
+			<div id="chatbottom" >
+			<div id="jquery_jplayer_1" class="jp-jplayer" ></div>
+			<div id="jp_container_1" class="jp-audio" style="margin-left:10px; margin-right:10px; margin-bottom:10px;">
+				<div class="jp-type-playlist">
+				<div class="jp-gui jp-interface" style="height: 30;">
+					<ul class="jp-controls" style=" padding: 2px 15px;">
+						<!--<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+						<li><a href="javascript:;" class="jp-pause" tabindex="1" style="display: none;">pause</a></li>
+						<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>-->
+						<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute" style="margin-left:0;margin-top: 5;">mute</a></li>
+						<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute" style="display: none;margin-left:0;margin-top: 5;">unmute</a></li>
+						<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume" style="margin-left:58;margin-top: 5;">max volume</a></li>
+					</ul>
+					<div class="jp-progress" style="top: 7px;left: 125px;width: 290;">
+						<div class="jp-seek-bar" style="width: 100%;">
+							<div class="jp-play-bar" style="width: 84.85266256769542%; overflow: hidden;"></div>
+						</div>
+					</div>
+					<div class="jp-volume-bar" style="top: 12px;left: 35;">
+						<div class="jp-volume-bar-value" style="width: 80%;"></div>
+					</div>
+					<div class="jp-time-holder" style="top: 5;left:130;width: 280px;">
+						<div class="jp-current-time">01:02</div>
+						<div class="jp-duration">04:12</div>
+					</div>
+				</div>
+				<div id="jp_container_N">
+				  <div class="jp-playlist">
+					<ul style="height: 120px;overflow: scroll;">
+					  <li></li> <!-- Empty <li> so your HTML conforms with the W3C spec -->
+					</ul>
+				  </div>
+				</div>
+				<div class="jp-no-solution" style="display: none;">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div>			
+			<div style="float:left">
+				<div id="soundfx" class="btn-group">
+					<h6 style="float:left">EmoAudio : </h6>
+					<button type="button" alt="applause.wav" class="btn btn-default">Clap</button>
+					<button type="button" alt="aww.mp3" class="btn btn-default">Aww</button>
+					<button type="button" alt="laughter.wav" class="btn btn-default">Laugh</button>
+					<button type="button" alt="cry.mp3" class="btn btn-default">Cry</button>
+					
+				</div>
+				
+				<div id="emoticons">
+					<h6 style="float:left">EmoIcons : </h6>
+					<img src='images/files/xmas_blue/laugh.png' width="30" height="30" title="Laugh" alt="laugh" name="HA! HA! HA!">
+					<img src='images/files/xmas_blue/smile.png' width="30" height="30" title="Smile" alt="smile" name="Smile">
+					<img src='images/files/xmas_blue/angry.png' width="30" height="30" title="Angry" alt="angry" name="GEE ARRR ARRR!">
+					<img src='images/files/xmas_blue/devil.png' width="30" height="30" title="Devil" alt="devil" name="Your soul is mine!">
+					<img src='images/files/xmas_blue/cry.png' width="30" height="30" title="Cry" alt="cry" name="HU! HU! HU!">
+					<img src='images/files/xmas_blue/stoptalk.png' width="30" height="30" title="Stop talking" alt="stoptalk" name="ZIP!">
+					<img src='images/files/xmas_blue/facepalm.jpg' width="30" height="30" title="FacePalm" alt="facepalm" name="MEYGHAD!">
+					<!--<img src='images/ivan/yey.jpg' width="30" height="30" title="ROFL" alt="rolf" name="">-->
+				</div>
+				
+			</div>
+			<div style="float:right">
+				<div class="btn-group" data-toggle="buttons-checkbox">
+					<span id="soundcheck" class="sound" style="float:left"></span>
+					<button style="float:left" id="scrollCheckbox" type="button" class="btn btn-warning active">Scroll</button>
+					
+				</div>
+				<br/>
+				<div style="float:right">
+					<h6 style="float:left">Snow: </h6>
+					<button id="showSnow" type="button" class="btn">Off</span>
+				</div>
+			</div>
+			
+			<form id="send-message">
+				<div class="input-append">
+					<input autofocus="autofocus" id="message" type="text" placeholder="Enter a message">
+					<button class="btn btn-info" type="submit" style="font-size:20px;height:40px;width:80px;">Send</button>
+					<button id="clear" type="button" class="btn btn-success" style="font-size:20px;height:40px;width:80px;">Clear</button>
+				</div>
+			</form>
+				
+			</div>
+		</div>
+		<div id="chatRight" class="span3">
+			<div id="users" class="span12"></div>
+			<marquee><img src="images/files/xmas_blue/christmas_reindeer.gif" style="position:relative"></marquee>
+		</div>
+		<button class="span3" id="buzzAll" style="cursor:pointer; background-color:red"></button>
+		<button id="flapBtn" type="button" class="btn" style="margin-left: 87px;"></button>
+		</div>
+	</div>
+	<div id="flapB" style="float: right; margin-right: 55px;">
+		<iframe scrolling="no" src="/flappybird" style="border: 0px none; height: 920px; width:650px;">
+	</div>
+	</div>
+	
+	</div>
+	<!--<div id="xmasBann" style="overflow:hidden;position:absolute; width:100%;display:none;">
+<iframe scrolling="no" src="http://www.sowebdesign.com/countdownChristmas/" style="border: 0px none; margin-left: -20px; height: 455px; margin-top: -283px; width:100%;">
+</iframe>-->
+</div>	
+</body>
+</html>

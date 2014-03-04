@@ -1,0 +1,139 @@
+html, body, h1 { margin: 0; padding: 0; border: 0; }
+body { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background: #008694; padding: 10px 0 }
+#game { position: relative; width: 640px; height: 800px; overflow: hidden; border: 5px solid #292225; }
+#sky { position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; background: #4ac3ce; }
+#clouds { position: absolute; top: 50%; left: 0px; right: 0px; height: 100px; background: #efffde url('images/clouds.jpg') center top repeat-x; }
+#buildings { position: absolute; top: 50%; margin-top: 80px; left: 0px; right: 0px; height: 165px; background: transparent url('images/buildings.jpg') center top repeat-x; }
+#floor { position: absolute; top: 50%; margin-top: 245px; left: 0px; right: 0px; bottom: 0px; background: #DEDA1D url('images/floor.jpg') 0px 0px repeat-x; }
+#logo { background: url('images/sprites.gif') 0px 0px no-repeat; width: 445px; height: 120px; overflow: hidden; position: absolute; top: 50%; margin-top: -260px; left: 50%; margin-left: -223px; }
+#bird { background: url('images/birds.gif') 0px 0px no-repeat; width: 105px; height: 80px; overflow: hidden; position: absolute; top: 50%; margin-top: -100px; left: 50%; margin-left: -53px; -webkit-backface-visibility: hidden; }
+#play { background: url('images/sprites.gif') 0px -130px no-repeat; width: 260px; height: 145px; overflow: hidden; position: absolute; top: 50%; margin-top: 60px; left: 50%; margin-left: -130px; cursor: pointer; }
+#share { display: none; background: url('images/sprites.gif') -585px -320px no-repeat; width: 215px; height: 90px; overflow: hidden; position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -218px; cursor: pointer; }
+#tweet { display: none; background: url('images/sprites.gif') -585px -520px no-repeat; width: 215px; height: 90px; overflow: hidden; position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: 2px; cursor: pointer; }
+#howto { display: none; background: url('images/sprites.gif') -470px 0px no-repeat; width: 335px; height: 245px; overflow: hidden; position: absolute; top: 50%; margin-top: -45px; left: 50%; margin-left: -168px; }
+#getready { display: none; background: url('images/sprites.gif') 0px -285px no-repeat; width: 460px; height: 125px; overflow: hidden; position: absolute; top: 50%; margin-top: -200px; left: 50%; margin-left: -230px; }
+#gameover { display: none; background: url('images/sprites.gif') 0px -520px no-repeat; width: 480px; height: 105px; overflow: hidden; position: absolute; top: 50%; margin-top: -340px; left: 50%; margin-left: -240px; }
+#scoreboard { display: none; background: url('images/sprites.gif') 0px -635px no-repeat; width: 565px; height: 285px; overflow: hidden; position: absolute; top: 50%; margin-top: -200px; left: 50%; margin-left: -283px; cursor: pointer; }
+#tap { display: none; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; cursor: pointer; }
+#dark { display: none; background: #292225; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; }
+#bright { display: none; background: #efefef; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; }
+#score { display: none; position: absolute; top: 50%; margin-top: -340px; left: 10px; right: 0px; text-align: center; }
+#score1, #score2, #score3, #score4 { display: inline-block; background: url('images/sprites.gif') 0px -420px no-repeat; width: 60px; height: 90px; margin: 0 3px 0 2px; }
+#scored { position: absolute; top: 85px; right: 55px; text-align: right; width: 250px; }
+#scored1, #scored2, #scored3, #scored4 { display: inline-block; background: url('images/sprites.gif') -575px -710px no-repeat; width: 35px; height: 50px; margin: 0 0 0 5px; }
+#topped { position: absolute; top: 190px; right: 55px; text-align: right; width: 250px; }
+#topped1, #topped2, #topped3, #topped4 { display: inline-block; background: url('images/sprites.gif') -575px -710px no-repeat; width: 35px; height: 50px; margin: 0 0 0 5px; }
+#newtop { position: absolute; top: 145px; right: 145px; background: url('images/sprites.gif') -575px -635px no-repeat; width: 80px; height: 35px; }
+#medal { position: absolute; top: 105px; left: 65px; background: url('images/sprites.gif') -575px -770px no-repeat; width: 110px; height: 110px; }
+.tube { position: absolute; top: 0; bottom: 0; left: 2500px; width: 130px; }
+.tube .top { background: url('images/sprites.gif') -815px 0px no-repeat; width: 130px; height: 700px; position: absolute; top: -400px; left: 0px; }
+.tube .bottom { background: url('images/sprites.gif') -955px 0px no-repeat; width: 130px; height: 700px; position: absolute; top: 500px; left: 0px; }
+#left_ad { position: absolute; top: 10px; left: 50%; margin-left: -510px; width: 190px; height: 600px; border: 0px solid #292225; }
+#right_ad { position: absolute; top: 10px; left: 50%; margin-left: 340px; width: 160px; height: 600px; border: 0px solid #292225; }
+#apps { position: absolute; top: 750px; left: 50%; margin-left: 340px; width: 170px; }
+#apps a { display: block; margin: 5px 0; }
+#apps a img { display: block; border: 0; }
+#apps1 { position: absolute; top: 750px; right: 50%; margin-right: 340px; width: 160px; height: 600px; border: 5px solid #292225; }
+#apps1 a img { display: block; border: 0; }
+#apps2 { position: absolute; top: 750px; left: 50%; margin-left: 340px; width: 160px; height: 600px; border: 5px solid #292225; }
+#top { width: 600px; height: 60px; position: relative; padding: 20px 0; text-align: center; }
+#top h1 { text-indent: -1000px; background: url('images/logo.gif') 0px 0px no-repeat; width: 290px; height: 60px; overflow: hidden; display: inline-block; }
+#left_ad { position: absolute; top: 110px; left: 50%; margin-left: -510px; width: 160px; height: 600px; border: 5px solid #292225; }
+#right_ad { position: absolute; top: 110px; left: 50%; margin-left: 340px; width: 160px; height: 600px; border: 5px solid #292225; }
+#bottom_ad {  width: 728px; height: 90px;  border: 5px solid #292225; }
+#left_ad2 { position: absolute; top: 110px; left: 25%; margin-left: -350px; width: 160px; height: 600px; border: 5px solid #292225; }
+#left_ad3 { position: absolute; top: 750px; left: 25%; margin-left: -350px; width: 160px; height: 600px; border: 5px solid #292225; }
+#right_ad2 { position: absolute; top: 110px; right: 25%; margin-right: -350px; width: 160px; height: 600px; border: 5px solid #292225; }
+#right_ad3 { position: absolute; top: 750px; right: 25%; margin-right: -350px; width: 160px; height: 600px; border: 5px solid #292225; }
+#left_ad4 { position: absolute; top: 10px;}
+
+.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_reset > div{overflow:hidden}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}
+.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_fluid span{width:100%}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+.fbpluginrecommendationsbarleft{left:10px}
+.fbpluginrecommendationsbarright{right:10px}

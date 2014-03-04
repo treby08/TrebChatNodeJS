@@ -1,0 +1,43 @@
+<html><head>
+    <title>Play flappy bird on Facebook!</title>
+   <!-- <script async="" src="//www.google-analytics.com/analytics.js"></script>
+	<script id="facebook-jssdk" src="//connect.facebook.net/en_US/all.js#xfbml=1&amp;appId=665114826878492"></script>
+	<script src="flappybird.js"></script>
+    <script src="flappyshare.js"></script>-->
+	<script src="/flappybirdshare"></script>
+    <script src="/flappybirdjs"></script>
+	<link href="/flappybirdcss" rel="stylesheet">
+    <!--<link rel="stylesheet" href="flappybird.css">-->
+    <link rel="shortcut icon" type="image/x-icon" href="images/flappy.jpg">
+<meta name="description" content="Play flappy bird for free on facebook! Play now and see if you can beat your friends!">
+<meta property="og:type" content="game">
+<meta property="og:title" content="Flappy Bird - Play now on Facebook">
+<meta property="og:description" content="I just beat my high score on FlappyBird! Play Now on Facebook and see if you can beat me!">
+<meta property="og:url" content="https://apps.facebook.com/flappy-birds/">
+<meta property="og:site_name" content="Flappy Bird">
+<meta property="og:image" content="images/flappybirds.gif">
+<meta property="fb:admins" content="1244832132">
+<meta property="fb:app_id" content="422001017930112">
+  <style type="text/css"></style></head>
+  <body style="">
+<!--<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="http://static.ak.facebook.com/connect/xd_arbiter.php?version=40#channel=f391dcbad&amp;origin=http%3A%2F%2F10.1.1.16:3000%2F" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="https://s-static.ak.facebook.com/connect/xd_arbiter.php?version=40#channel=f391dcbad&amp;origin=http%3A%2F%2Fflappybirds.co.uk" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="ffa3d280c" frameborder="0" allowtransparency="true" scrolling="no" src="https://www.facebook.com/connect/ping?client_id=665114826878492&amp;domain=flappybirds.co.uk&amp;origin=1&amp;redirect_uri=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D40%23cb%3Df12c74b6d%26domain%3Dflappybirds.co.uk%26origin%3Dhttp%253A%252F%252Fflappybirds.co.uk%252Ff391dcbad%26relation%3Dparent&amp;response_type=token%2Csigned_request%2Ccode&amp;sdk=joey" style="display: none;"></iframe></div></div></div>-->
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=665114826878492";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="top"><h1>FlappyBird</h1>
+</div>
+   
+
+<div id="game"><div id="sky"></div><div id="clouds"></div><div id="buildings"></div><div id="trees"></div><div id="tube1" class="tube" style="left: 9650px;"><div id="tube1top" class="top" style="top: -444px;"></div><div id="tube1bot" class="bottom" style="top: 456px;"></div></div><div id="tube2" class="tube" style="left: 9650px;"><div id="tube2top" class="top" style="top: -557px;"></div><div id="tube2bot" class="bottom" style="top: 343px;"></div></div><div id="tube3" class="tube" style="left: 9650px;"><div id="tube3top" class="top" style="top: -401px;"></div><div id="tube3bot" class="bottom" style="top: 499px;"></div></div><div id="bird" style="margin-top: 175px; -webkit-transform: rotate(90deg); margin-left: -200px; background-position: 0px -80px;"></div><div id="floor" style="background-position: 0px 0px;"></div><div id="logo" style="display: none;"></div><div id="getready" style="display: none;"></div><div id="gameover" style="display: block;"></div><div id="scoreboard" style="display: block;"><div id="scored"><div id="scored4" style="display: none;"></div><div id="scored3" style="display: none;"></div><div id="scored2" style="display: none;"></div><div id="scored1" style="background-position: -575px -710px;"></div></div><div id="topped"><div id="topped4" style="display: none;"></div><div id="topped3" style="display: none;"></div><div id="topped2" style="display: none;"></div><div id="topped1" style="display: inline-block; background-position: -710px -710px;"></div></div><div id="medal" style="display: none;"></div><div id="newtop" style="display: none;"></div></div><div id="play" onclick="play();" style="display: block; margin-top: 160px;"></div><div id="share" onclick="share_facebook();" style="margin-top: 60px; display: block;"></div><div id="tweet" onclick="share_twitter();" style="margin-top: 60px; display: block;"></div><div id="howto" style="display: none;"></div><div id="score" style="display: none;"><div id="score4" style="display: none;"></div><div id="score3" style="display: none;"></div><div id="score2" style="display: none;"></div><div id="score1" style="background-position: 0px -420px;"></div></div><div id="tap" onclick="tap()" style="display: none;" onkeypress="tap()"></div><div id="dark" style="display: none;"></div><div id="bright" style="opacity: 0.8; display: none;"></div></div>
+
+<div id="sounds">
+      <audio id="fx_rope_swinging_swish_2"><source src="sounds/rope_swinging_swish_2.mp3" type="audio/mpeg"><source src="sounds/rope_swinging_swish_2.ogg" type="audio/ogg"></audio>
+      <audio id="fx_punch26"><source src="sounds/punch26.mp3" type="audio/mpeg"><source src="sounds/punch26.ogg" type="audio/ogg"></audio>
+      <audio id="fx_app_game_interactive_alert_tone_016"><source src="sounds/app_game_interactive_alert_tone_016.mp3" type="audio/mpeg"><source src="sounds/app_game_interactive_alert_tone_016.ogg" type="audio/ogg"></audio>
+      <audio id="fx_cartoonish_whip_crack"><source src="sounds/cartoonish_whip_crack.mp3" type="audio/mpeg"><source src="sounds/cartoonish_whip_crack.ogg" type="audio/ogg"></audio>
+    </div>
+</body></html>

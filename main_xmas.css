@@ -1,0 +1,395 @@
+body{
+	background-color:#FFF;
+	background: url('images/files/xmas_blue/bg.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#googleCover{
+	width:100%;
+	height:100%;
+	background:url('images/files/google.png');
+	position:fixed;
+	z-index:9999;
+	display:none;
+}
+#nickError{
+	color: white;
+}
+#nickWrap{
+	top:50%;
+	left:50%;
+	position:fixed;
+	margin-top: -100px;
+	margin-left: -150px;
+}
+#nickname{
+	font-size:25px;
+	height:60px;
+	width:300px;
+	line-height:50px;
+	padding-left:20px;
+}
+#send-message{
+	margin-left:20px;
+	margin-top:20px;
+}
+#message{
+	font-size:20px;
+	height:40px;
+	width:250px;
+	line-height:30px;
+	padding-left:10px;
+}
+.sound{
+	margin-left:5px;
+	cursor: pointer;
+	display: inline-block;
+	width:28px;
+	height:28px;
+	background: url('images/files/soundon.png');
+}
+.soundoff {
+	background: url('images/files/soundoff.png');
+}
+#topic{
+	line-height: 1.2;
+	font-size:1.5em;
+	height:25px;
+	padding-top:6px;
+	color:#D8D8D8;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	display:block;
+	background: url('images/files/xmas_blue/topicbg.png');
+	font-weight:bold;
+	background-color:#FFF;
+}
+#nxtSong{
+	height:30px;
+	width:300px;
+	line-height: 1.3;
+	font-size:1.3em;
+	height:20px;
+	padding-top:7px;
+	color:#ff0000;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-weight:bold;
+}
+.newtopic{
+	color:rgb(4, 67, 177);
+	font-style: italic;
+}
+#chatRight{
+	height:550px;
+	margin-left:5px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	background-color:#2C65A2;/*#191b1f;*/
+	background-image:url('http://www.iconsdb.com/icons/preview/caribbean-blue/christmas-38-xxl.png');
+	background-repeat:no-repeat;
+	background-position:bottom; 
+	margin-top:70px;
+}
+#container_div{
+	background-color:#CCCCCC;
+	width:440px;
+	height:120px;
+	padding-left:10px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+}
+#users{
+	color:#0F33A5;/*#6a6a6a;*/
+	margin:5px;
+	font-family:"Arial Black";
+	font-size:15px;
+	
+}
+#chattop{
+	width:430px;
+	margin-bottom:10px;
+	padding:10px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	/*background-color: #545454;*/
+	background-image:url('http://comps.canstockphoto.com/can-stock-photo_csp4856226.jpg');
+	border-top:2px solid #7a7a7a;
+	border-bottom:2px solid #464645;
+	-webkit-box-shadow:  0px 3px 2px 2px rgba(0, 0, 0, .5);
+	box-shadow:  0px 3px 2px 2px rgba(0, 0, 0, .5);
+}
+#chatbottom{
+	border-top: 2px dashed #1B7CF8;
+	padding-top:10px;
+	background-color:#B8D5F0;
+	border-bottom: 2px dashed #B0B4BD;
+	/*background-image:url('http://www.iconsdb.com/icons/preview/royal-blue/christmas-56-xxl.png');*/
+}
+#chat{
+	border-bottom: 2px dashed #B0B4BD;
+	height:500px;
+	padding:10px;
+	overflow:auto;
+	background-color:#ECECEC;
+	background:url('http://i.imm.io/1jYim.png') no-repeat;
+	background-position:right top; 
+}
+#contentWrap{
+
+	display:none;
+	width:600px;
+}
+#flapB{
+
+	display:none;
+	width:600px;
+}
+#chatWrap{
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	background-color: #FFF;
+	float: left;
+	/*border: 1px #000 solid;*/
+}
+#emoticons{
+	display:block;
+	margin-left:10px;
+	/*height:64px;*/
+}
+#soundfx{
+	margin-left:10px;
+	/*height:64px;*/
+}
+.btn-group{
+	float:right
+}
+#scrollCheckbox{
+	margin-left:5px;
+}
+#emoticons span{
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.applause-1{
+	 background:url('images/files/clap.gif');	
+	 display:inline-block;
+	width:64px;
+	height:64px;
+}
+.Aww-Sound-Effect{
+	 background:url('images/files/awwwww.gif');	
+	 display:inline-block;
+	width:64px;
+	height:64px;
+}
+.laughter-2{
+	background:url('images/files/crowd-laugh.jpg');	
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.man-cry{
+	 background:url('images/files/crying-man.gif');	
+	 display:inline-block;
+	width:64px;
+	height:64px;
+}
+.smile{
+	 background:url('images/files/xmas_blue/smile.png');	
+	 display:inline-block;
+	width:64px;
+	height:64px;
+}
+.laugh{
+	background:url('images/files/xmas_blue/laugh.png');
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.cry{
+	background:url('images/files/xmas_blue/cry.png');
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.devil{
+	background:url('images/files/xmas_blue/devil.png');
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.angry{
+	background:url('images/files/xmas_blue/angry.png');
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.stoptalk{
+	background:url('images/files/xmas_blue/stoptalk.png');
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.facepalm{
+	background:url('images/files/xmas_blue/facepalm.jpg');
+	display:inline-block;
+	width:64px;
+	height:64px;
+}
+.rolf{
+	background:url('images/ivan/yey.jpg');
+	display:inline-block;
+	width:410px;
+	height:307px;
+}
+#emoticons img{
+	cursor:pointer;
+}
+.error{
+	color:red;
+}
+.whisper{
+	color: gray;
+	font-style: italic;
+}
+.enters{
+	color: green;
+	font-style: italic;
+}
+.exits{
+	color: red;
+	font-style: italic;
+}
+.memsg{
+	color:purple;
+	font-weight: bold;
+}
+.buzz{
+	color:red;
+	font-weight: bold;	
+}
+.newnick{
+	color:green;
+	font-weight: bold;
+}
+
+#map{
+	width:250px;
+	height:250px;
+	position: relative;
+	background:lightblue;
+	display:block;
+}
+#clear{
+	margin-left:5px;
+}
+.user{
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	display: block; 
+	background: #FF0000; 
+	width: 100px; 
+	height: 100px;
+}
+.available{
+	/*background: url('images/files/green-bubble.png');*/
+	width:7px;
+	height:7px;
+	display: inline-block;
+	-webkit-border-radius:5px;
+	background-color:#FFF;
+}
+.away{
+	/*background: url('images/files/yellow-bubble.png');*/
+	width:7px;
+	height:7px;
+	display: inline-block;
+	-webkit-border-radius:5px;
+	background-color:#C7BFBF;
+}
+.dnd{
+	background: url('images/files/red-bubble.png');
+	width:7px;
+	height:7px;
+	display: inline-block;
+}
+div#content {
+padding-bottom: 33px;
+}
+		div#cwrap {
+	padding: 20px 20px;
+	border: 1px solid;
+	border-radius: 8px;
+}
+div#plwrap {
+	padding-top: 20px;
+	font-size: 1em;
+}
+
+#plUL {
+	list-style: none;
+	margin: 0;
+	padding: 2px 0 0 0;
+}
+
+#plUL li {
+	cursor: pointer;
+	line-height: 36px;
+	border: 1px solid black;
+	border-radius: 8px;
+	margin: 0 3px 6px 3px;
+}
+
+#plUL li:hover {
+	font-size: 1.25em;
+}
+
+p.plus10 {
+	padding-left: 10px;
+}
+
+.plHead, .plItem {
+	position: relative;
+}
+
+.plHead {
+	text-align: center;
+}
+
+.plHeadTitle, .plTitle {
+	position: absolute;
+	top: 0;
+	right: 65px;
+	left: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.plHeadNum, .plNum {
+	width: 25px;
+}
+
+.plHeadNum, .plNum, .plLength {
+	text-align: right;
+}
+
+.plHeadLength, .plLength {
+	position: absolute;
+	top: 0;
+	right: 5px;
+	width: 60px;
+}
+
+.plSel, .plSel:hover {
+	font-size: 1.25em;
+	cursor: default !important;
+}
